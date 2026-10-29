@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#241b36">
+<title>ハロウィン ミステリーヒント</title>
+<style>
+:root{--night:#211a32;--panel:#302543;--gold:#f2d18b;--cream:#fff9ed;--lav:#d8c8f4;--orange:#f29a58}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:"Noto Sans JP","Yu Gothic",Meiryo,sans-serif;background:radial-gradient(ellipse at top,#514069 0%,#292039 48%,#171321 100%);padding:20px 14px 36px}
+.wrap{max-width:620px;margin:0 auto}
+header{text-align:center;padding:22px 12px 18px}
+.moon{font-size:32px;letter-spacing:8px}
+h1{font-family:"Yu Mincho",serif;color:var(--gold);font-size:clamp(25px,6vw,36px);letter-spacing:.08em;margin:10px 0}
+.sub{color:#e4d9f4;font-size:14px;letter-spacing:.08em}
+.card{background:linear-gradient(145deg,rgba(58,43,76,.97),rgba(35,28,49,.98));border:1px solid #a88a63;border-radius:18px;padding:22px;box-shadow:0 10px 28px #100c1c80;position:relative}
+.card:before{content:"✦";position:absolute;top:10px;left:13px;color:var(--gold)}
+.card:after{content:"✦";position:absolute;bottom:10px;right:13px;color:var(--gold)}
+.problem{text-align:center;font-family:"Yu Mincho",serif;font-size:25px;color:var(--gold);margin:2px 0 18px}
+.count{display:inline-block;background:#f2d18b;color:#241b36;border-radius:999px;padding:9px 18px;font-weight:800;margin-bottom:20px}
+.intro{text-align:center;color:#e7def0;font-size:14px;line-height:1.8;margin:0 0 20px}
+.hint{border:1px solid #665477;background:#241d33;border-radius:13px;margin:12px 0;overflow:hidden}
+.hint button{width:100%;border:0;background:transparent;color:var(--cream);padding:17px 16px;display:flex;align-items:center;gap:12px;text-align:left;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.hint button:focus-visible{outline:3px solid var(--gold);outline-offset:-4px}
+.num{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#261d34;flex:0 0 30px}
+.chev{margin-left:auto;color:var(--gold);font-size:20px}
+.answer{display:none;border-top:1px dashed #76638a;padding:16px 18px 18px;line-height:1.8;color:#fff5d9;font-size:17px}
+.hint.open .answer{display:block}
+.hint.open .chev{transform:rotate(180deg)}
+.tip{font-size:12px;color:#cbbddc;text-align:center;margin-top:18px}
+footer{text-align:center;color:#b8a9c9;font-size:11px;margin:20px 0 0}
+.hidden{display:none}
+.home{text-align:center}
+.home .card{margin-top:10px}
+.home p{line-height:1.8}
+.links{display:grid;gap:10px;margin-top:18px}
+.links a{display:block;text-decoration:none;color:var(--cream);padding:14px;border:1px solid #a88a63;border-radius:12px;background:#302543}
+@media(min-width:500px){body{padding-top:32px}.card{padding:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="moon">☾ ✦ 🎃 ✦ ☽</div><h1>なぞときヒントのへや</h1><div class="sub">HALLOWEEN MYSTERY RALLY</div></header>
+<main id="hintPage" class="card">
+  <div class="problem" id="problemTitle">問１ のヒント</div>
+  <div style="text-align:center"><span class="count" id="countText">こたえは ５もじ</span></div>
+  <p class="intro">こまったときは、ヒントをひらいてみよう。<br>ヒントは１つずつ、じぶんのタイミングで見られるよ。</p>
+  <section class="hint" id="hint1">
+    <button type="button" aria-expanded="false" aria-controls="answer1"><span class="num">1</span><span>ヒント１をひらく</span><span class="chev">⌄</span></button>
+    <div class="answer" id="answer1"></div>
+  </section>
+  <section class="hint" id="hint2">
+    <button type="button" aria-expanded="false" aria-controls="answer2"><span class="num">2</span><span>ヒント２をひらく</span><span class="chev">⌄</span></button>
+    <div class="answer" id="answer2"></div>
+  </section>
+  <div class="tip">あせらず、ゆっくり考えてみよう！</div>
+</main>
+<main id="homePage" class="card home hidden">
+  <div class="problem">ヒントをえらぼう</div>
+  <p>紙のなぞを見ながら、対応するヒントをひらいてね。</p>
+  <div class="links">
+    <a href="?q=1">🎃　問１のヒント</a>
+    <a href="?q=2">🦇　問２のヒント</a>
+    <a href="?q=3">👻　問３のヒント</a>
+  </div>
+</main>
+<footer>© HALLOWEEN MYSTERY RALLY</footer>
+</div>
+<script>
+const data = {
+  "1": {title:"問１ のヒント", count:"こたえは ５もじ", h1:"いろがヒントだよ", h2:"「あか」いろ と 「き」いろ"},
+  "2": {title:"問２ のヒント", count:"こたえは ３もじ", h1:"まずはひだりからよんでみよう！", h2:"ちいさいしかくをみのがさないで！"},
+  "3": {title:"問３ のヒント", count:"こたえは ４もじ", h1:"た＝タ　ろ＝ロ", h2:"「タ」と「ロ」を１文字のかんじにしてみると…？"}
+};
+const params=new URLSearchParams(location.search), q=params.get("q");
+if(!data[q]){
+ document.getElementById("hintPage").classList.add("hidden");
+ document.getElementById("homePage").classList.remove("hidden");
+}else{
+ const d=data[q];
+ document.getElementById("problemTitle").textContent=d.title;
+ document.getElementById("countText").textContent=d.count;
+ document.getElementById("answer1").textContent=d.h1;
+ document.getElementById("answer2").textContent=d.h2;
+}
+document.querySelectorAll(".hint button").forEach(btn=>btn.addEventListener("click",()=>{
+ const box=btn.closest(".hint"), isOpen=box.classList.toggle("open");
+ btn.setAttribute("aria-expanded",String(isOpen));
+}));
+</script>
+</body>
+</html>
